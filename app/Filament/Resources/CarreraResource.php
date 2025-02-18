@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FacultadResource\Pages;
-use App\Filament\Resources\FacultadResource\RelationManagers;
-use App\Models\Facultad;
+use App\Filament\Resources\CarreraResource\Pages;
+use App\Filament\Resources\CarreraResource\RelationManagers;
+use App\Models\Carrera;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,22 +13,27 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FacultadResource extends Resource
+class CarreraResource extends Resource
 {
-    protected static ?string $model = Facultad::class;
-    protected static ?string $label = 'Facultades';
+    protected static ?string $model = Carrera::class;
+    protected static ?string $label = 'Carreras';
     protected static ?string $navigationGroup = 'Management Academic';
-    protected static ?string $navigationIcon = 'heroicon-o-building-library';
-    protected static ?int $navigationSort= 2;
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?int $navigationSort= 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nombre')
-                    ->label('Nombre de la Facultad')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('facultad_id')
+                    ->relationship('facultad', 'nombre')
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->required(),
                 Forms\Components\Textarea::make('direccion')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('telefono')
@@ -54,8 +59,7 @@ class FacultadResource extends Resource
                 Forms\Components\TextInput::make('enlace_maps')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\Toggle::make('estado')
-                    ->required(),
+                Forms\Components\Toggle::make('estado')->default(true),
             ]);
     }
 
@@ -65,14 +69,17 @@ class FacultadResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('facultad_id')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('telefono')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('web')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('logo')
-                    ->size(50),
+                Tables\Columns\TextColumn::make('logo')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('enlace_facebook')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('enlace_maps')
@@ -111,9 +118,9 @@ class FacultadResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFacultads::route('/'),
-            'create' => Pages\CreateFacultad::route('/create'),
-            'edit' => Pages\EditFacultad::route('/{record}/edit'),
+            'index' => Pages\ListCarreras::route('/'),
+            'create' => Pages\CreateCarrera::route('/create'),
+            'edit' => Pages\EditCarrera::route('/{record}/edit'),
         ];
     }
 }

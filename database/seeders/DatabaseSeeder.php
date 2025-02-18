@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => hash::make('admin123'),
         ]);
         $this->call(FacultadSeeder::class);
+        $this->call(CarreraSeeder::class);
+        $this->call(InstitutoSeeder::class);
     }
 }
