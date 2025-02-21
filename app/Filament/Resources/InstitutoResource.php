@@ -70,11 +70,9 @@ class InstitutoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('facultad_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('facultad.nombre')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('carrera_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('carrera.nombre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
@@ -100,6 +98,7 @@ class InstitutoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

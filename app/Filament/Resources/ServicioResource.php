@@ -49,11 +49,9 @@ class ServicioResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('instituto_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('instituto.nombre')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('laboratorio_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('laboratorio.nombre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -69,6 +67,7 @@ class ServicioResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

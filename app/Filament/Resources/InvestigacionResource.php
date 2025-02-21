@@ -51,11 +51,9 @@ class InvestigacionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('instituto_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('Instituto.nombre')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('tipo_investigacion_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('TipoInvestigacion.tipo')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

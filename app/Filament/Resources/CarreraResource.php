@@ -69,8 +69,7 @@ class CarreraResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('facultad_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('facultad.nombre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('telefono')
                     ->searchable(),

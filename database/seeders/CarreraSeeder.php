@@ -15,9 +15,9 @@ class CarreraSeeder extends Seeder
     {
          DB::table('carreras')->insert([
             [
-                'nombre' => 'Ingenieria Agronómica',
+                'nombre' => 'Ingeniería en Producción y Comercialización Agropecuaria',
                 'facultad_id' => 1,
-                'direccion' => 'Av. Landaeta esquina Héroes del Acre., La Paz, Bolivia',
+                'direccion' => null,
                 'telefono' => null,
                 'email' => null,
                 'web' => 'https://fa.umsa.bo/',
